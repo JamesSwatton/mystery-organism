@@ -34,7 +34,8 @@ function pAequorFactory(specimenNum, dna) {
                 if (dna[i] === dnaToCompare[i]) { identicalBaseCount ++; }
             }
             const baseMatchPercentage = Math.floor((identicalBaseCount / 15) * 100);
-            console.log(`These two specimens have ${baseMatchPercentage}% DNA in common.`);
+            // console.log(`These two specimens have ${baseMatchPercentage}% DNA in common.`);
+            return baseMatchPercentage;
         },
         willLikelySurvive() {
             let baseCandGCount = 0;
@@ -43,9 +44,7 @@ function pAequorFactory(specimenNum, dna) {
                     baseCandGCount ++;
                 }
             });
-            console.log(baseCandGCount);
             const baseCandGMatchPercentage = Math.floor((baseCandGCount / 15) * 100);
-            console.log(baseCandGMatchPercentage);
             return baseCandGMatchPercentage >= 60;
         }
     };
@@ -69,7 +68,31 @@ while(survivingSpecimens.length != 30) {
     idCounter ++;
 }
 
-console.log(survivingSpecimens);
+// console.log(survivingSpecimens);
 
+let arr = [10, 2, 7, 13, 43, 5];
+
+function averageBaseMatch(organism, specimens) {
+    const allMatchPercentages = [];
+    let total = 0;
+    specimens.forEach(specimen => {
+        if (organism.specimenNum != specimen.specimenNum) {
+            allMatchPercentages.push( organism.compareDNA(specimen) );
+        }
+    });
+    for (value of allMatchPercentages) {
+        total += value;
+    }
+    return Math.floor(total / allMatchPercentages.length);
+}
+
+function mostRelatedOrganism(specimens) {
+    return specimens.reduce((acc, curr) => {
+        return averageBaseMatch(acc, specimens) > averageBaseMatch(curr, specimens) ? acc : curr;
+    });
+}
+
+// console.log(averageBaseMatch(survivingSpecimens[0], survivingSpecimens));
+console.log(mostRelatedOrganism(survivingSpecimens));
 
 
