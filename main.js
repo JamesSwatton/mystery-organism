@@ -51,13 +51,25 @@ function pAequorFactory(specimenNum, dna) {
     };
 }
 
-const organism = pAequorFactory(1, mockUpStrand());
-const organism2 = pAequorFactory(2, mockUpStrand());
-console.log(organism.dna);
-console.log(organism2.dna);
-organism.compareDNA(organism2);
-console.log(organism.willLikelySurvive());
+// const organism = pAequorFactory(1, mockUpStrand());
+// const organism2 = pAequorFactory(2, mockUpStrand());
+// console.log(organism.dna);
+// console.log(organism2.dna);
+// organism.compareDNA(organism2);
+// console.log(organism.willLikelySurvive());
 
+let survivingSpecimens = [];
+let idCounter = 1;
+
+while(survivingSpecimens.length != 30) {
+    let newOrganism = pAequorFactory(idCounter, mockUpStrand());
+    if (newOrganism.willLikelySurvive()) {
+        survivingSpecimens.push(newOrganism);
+    }
+    idCounter ++;
+}
+
+console.log(survivingSpecimens);
 
 
 
