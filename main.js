@@ -74,15 +74,12 @@ let arr = [10, 2, 7, 13, 43, 5];
 
 function averageBaseMatch(organism, specimens) {
     const allMatchPercentages = [];
-    let total = 0;
     specimens.forEach(specimen => {
         if (organism.specimenNum != specimen.specimenNum) {
             allMatchPercentages.push( organism.compareDNA(specimen) );
         }
     });
-    for (value of allMatchPercentages) {
-        total += value;
-    }
+    const total = allMatchPercentages.reduce((acc, curr) => acc + curr);
     return Math.floor(total / allMatchPercentages.length);
 }
 
