@@ -13,8 +13,27 @@ const mockUpStrand = () => {
   return newStrand;
 };
 
+function pAequorFactory(specimenNum, dna) {
+    return {
+        specimenNum,
+        dna,
+        mutate() {
+            const baseToMutateIndex = Math.floor(Math.random() * dna.length);
+            const newBase = returnRandBase();
+            if (dna[baseToMutateIndex] != newBase) {
+                dna.splice(baseToMutateIndex, 1, newBase);
+            } else {
+                mutate();
+            }
+            return dna;
+        }
+    };
+}
 
-
+const organism = pAequorFactory(1, mockUpStrand());
+console.log(organism);
+console.log(organism.mutate());
+console.log(organism.mutate());
 
 
 
