@@ -26,15 +26,24 @@ function pAequorFactory(specimenNum, dna) {
                 mutate();
             }
             return dna;
+        },
+        compareDNA(specimen) {
+            let identicalBaseCount = 0;
+            const dnaToCompare = specimen.dna;
+            for (let i = 0; i < 15; i ++) {
+                if (dna[i] === dnaToCompare[i]) { identicalBaseCount ++; }
+            }
+            const baseMatchPercentage = `${Math.floor((identicalBaseCount / 15) * 100)}%`;
+            console.log(`These two specimens have ${baseMatchPercentage} DNA in common.`);
         }
     };
 }
 
 const organism = pAequorFactory(1, mockUpStrand());
-console.log(organism);
-console.log(organism.mutate());
-console.log(organism.mutate());
-
+const organism2 = pAequorFactory(2, mockUpStrand());
+console.log(organism.dna);
+console.log(organism2.dna);
+organism.compareDNA(organism2);
 
 
 
