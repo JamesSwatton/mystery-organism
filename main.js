@@ -33,8 +33,20 @@ function pAequorFactory(specimenNum, dna) {
             for (let i = 0; i < 15; i ++) {
                 if (dna[i] === dnaToCompare[i]) { identicalBaseCount ++; }
             }
-            const baseMatchPercentage = `${Math.floor((identicalBaseCount / 15) * 100)}%`;
-            console.log(`These two specimens have ${baseMatchPercentage} DNA in common.`);
+            const baseMatchPercentage = Math.floor((identicalBaseCount / 15) * 100);
+            console.log(`These two specimens have ${baseMatchPercentage}% DNA in common.`);
+        },
+        willLikelySurvive() {
+            let baseCandGCount = 0;
+            dna.forEach(base => {
+                if (base === 'C' || base === 'G') {
+                    baseCandGCount ++;
+                }
+            });
+            console.log(baseCandGCount);
+            const baseCandGMatchPercentage = Math.floor((baseCandGCount / 15) * 100);
+            console.log(baseCandGMatchPercentage);
+            return baseCandGMatchPercentage >= 60;
         }
     };
 }
@@ -44,6 +56,7 @@ const organism2 = pAequorFactory(2, mockUpStrand());
 console.log(organism.dna);
 console.log(organism2.dna);
 organism.compareDNA(organism2);
+console.log(organism.willLikelySurvive());
 
 
 
